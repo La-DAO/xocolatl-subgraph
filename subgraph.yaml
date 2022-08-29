@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.4
 schema:
   file: ./schema.graphql
 dataSources:
@@ -8,9 +8,10 @@ dataSources:
     source:
       address: "0x4f97c3c8af0764cc0af5c3c0f5064f4a6bd5b138"
       abi: HouseOfCoin
+      startBlock: 32142480 
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - ActiveOracleChanged
@@ -60,3 +61,59 @@ dataSources:
         - event: UMAHelperAddressChanged(address)
           handler: handleUMAHelperAddressChanged
       file: ./src/house-of-coin.ts
+  - kind: ethereum
+    name: HouseOfReserveWETH
+    network: matic
+    source:
+      address: "0x09dFC327364701d73683aCe049B8A5a8Ea27F3E8"
+      abi: HouseOfReserveWETH
+      startBlock: 32142482 
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - HouseOfReserveWETHActiveOracleChanged
+        - HouseOfReserveWETHChainlinkAddressChange
+        - CollateralRatioChanged
+        - DepositLimitChanged
+        - HouseOfReserveWETHInitialized
+        - HouseOfReserveWETHRoleAdminChanged
+        - HouseOfReserveWETHRoleGranted
+        - HouseOfReserveWETHRoleRevoked
+        - HouseOfReserveWETHTickersChanged
+        - HouseOfReserveWETHTrustedSignerChanged
+        - HouseOfReserveWETHUMAHelperAddressChanged
+        - UserDeposit
+        - UserWithdraw
+      abis:
+        - name: HouseOfReserveWETH
+          file: ./abis/HouseOfReserveWETH.json
+      eventHandlers:
+        - event: HouseOfReserveWETHActiveOracleChanged(uint256)
+          handler: handleHouseOfReserveWETHActiveOracleChanged
+        - event: HouseOfReserveWETHChainlinkAddressChange(address,address)
+          handler: handleHouseOfReserveWETHChainlinkAddressChange
+        - event: CollateralRatioChanged((uint256,uint256))
+          handler: handleCollateralRatioChanged
+        - event: DepositLimitChanged(uint256)
+          handler: handleDepositLimitChanged
+        - event: HouseOfReserveWETHInitialized(uint8)
+          handler: handleHouseOfReserveWETHInitialized
+        - event: HouseOfReserveWETHRoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleHouseOfReserveWETHRoleAdminChanged
+        - event: HouseOfReserveWETHRoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleHouseOfReserveWETHRoleGranted
+        - event: HouseOfReserveWETHRoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleHouseOfReserveWETHRoleRevoked
+        - event: HouseOfReserveWETHTickersChanged(bytes32,bytes32)
+          handler: handleHouseOfReserveWETHTickersChanged
+        - event: HouseOfReserveWETHTrustedSignerChanged(address)
+          handler: handleHouseOfReserveWETHTrustedSignerChanged
+        - event: HouseOfReserveWETHUMAHelperAddressChanged(address)
+          handler: handleHouseOfReserveWETHUMAHelperAddressChanged
+        - event: UserDeposit(indexed address,indexed address,uint256)
+          handler: handleUserDeposit
+        - event: UserWithdraw(indexed address,indexed address,uint256)
+          handler: handleUserWithdraw
+      file: ./src/house-of-reserve-weth.ts

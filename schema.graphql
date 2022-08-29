@@ -1,5 +1,6 @@
-type ExampleEntity @entity {
+type User @entity {
   id: ID!
-  count: BigInt!
-  newOracleNumber: BigInt! # uint256
+  wethDeposited: BigInt!
+  xocDebt: BigInt! # xoc debt 
 }
+

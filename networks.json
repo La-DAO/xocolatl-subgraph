@@ -2,6 +2,9 @@
   "matic": {
     "HouseOfCoin": {
       "address": "0x4f97c3c8af0764cc0af5c3c0f5064f4a6bd5b138"
+    },
+    "HouseOfReserveWETH": {
+      "address": "0x09dFC327364701d73683aCe049B8A5a8Ea27F3E8"
     }
   }
 }
