@@ -1,0 +1,62 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: HouseOfCoin
+    network: matic
+    source:
+      address: "0x4f97c3c8af0764cc0af5c3c0f5064f4a6bd5b138"
+      abi: HouseOfCoin
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - ActiveOracleChanged
+        - ChainlinkAddressChange
+        - CoinMinted
+        - CoinPayback
+        - Initialized
+        - Liquidation
+        - LiquidationParamsChanges
+        - MarginCall
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+        - TickersChanged
+        - TrustedSignerChanged
+        - UMAHelperAddressChanged
+      abis:
+        - name: HouseOfCoin
+          file: ./abis/HouseOfCoin.json
+      eventHandlers:
+        - event: ActiveOracleChanged(uint256)
+          handler: handleActiveOracleChanged
+        - event: ChainlinkAddressChange(address,address)
+          handler: handleChainlinkAddressChange
+        - event: CoinMinted(indexed address,indexed uint256,uint256)
+          handler: handleCoinMinted
+        - event: CoinPayback(indexed address,indexed uint256,uint256)
+          handler: handleCoinPayback
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: Liquidation(indexed address,indexed address,uint256,uint256)
+          handler: handleLiquidation
+        - event: LiquidationParamsChanges(uint256,uint256,uint256,uint256,uint256)
+          handler: handleLiquidationParamsChanges
+        - event: MarginCall(indexed address,indexed address,indexed address)
+          handler: handleMarginCall
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+        - event: TickersChanged(bytes32,bytes32)
+          handler: handleTickersChanged
+        - event: TrustedSignerChanged(address)
+          handler: handleTrustedSignerChanged
+        - event: UMAHelperAddressChanged(address)
+          handler: handleUMAHelperAddressChanged
+      file: ./src/house-of-coin.ts
